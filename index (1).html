@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Srivarsha Rayasam</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4EE;
+    --ink: #1A1814;
+    --ink-muted: #5C5850;
+    --ink-faint: #9C9890;
+    --accent: #C4673A;
+    --accent-light: #F0DDD4;
+    --border: #E0DDD6;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 4rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-text h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-text h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+    max-width: 420px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--ink-muted);
+    background: var(--white);
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--ink);
+    background: var(--white);
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-stat-card .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .hero-stat-card .value {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    margin-bottom: 3rem;
+    line-height: 1.3;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--ink-muted);
+    margin-bottom: 1rem;
+    line-height: 1.85;
+  }
+
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .detail-item .detail-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.3rem;
+  }
+
+  .detail-item .detail-value {
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  /* PROJECTS */
+  /* ============================================================
+     TO ADD A NEW PROJECT: copy one .project-card block and
+     update the title, description, tags, and links inside it.
+     ============================================================ */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent-light);
+    transition: background 0.2s;
+  }
+
+  .project-card:hover { border-color: #c8c4bc; transform: translateY(-2px); }
+  .project-card:hover::before { background: var(--accent); }
+
+  .project-type {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .project-title {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    line-height: 1.75;
+    flex: 1;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .project-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--ink-muted);
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .project-link:hover { opacity: 0.7; }
+
+  /* WRITING */
+  /* ============================================================
+     TO ADD A NEW WRITING PIECE: copy one .writing-row block
+     and update the title, description, category, and link.
+     ============================================================ */
+  .writing-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .writing-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .writing-row:first-child { border-top: 1px solid var(--border); }
+
+  .writing-row:hover .writing-title { color: var(--accent); }
+
+  .writing-category {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.3rem;
+  }
+
+  .writing-title {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+    transition: color 0.2s;
+    line-height: 1.4;
+  }
+
+  .writing-desc {
+    font-size: 0.83rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    max-width: 580px;
+  }
+
+  .writing-arrow {
+    font-size: 1rem;
+    color: var(--ink-faint);
+    padding-top: 1.2rem;
+    transition: transform 0.2s, color 0.2s;
+  }
+
+  .writing-row:hover .writing-arrow { transform: translate(3px, -3px); color: var(--accent); }
+
+  /* CONTACT */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-text p {
+    color: var(--ink-muted);
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 0.2s;
+  }
+
+  .contact-link-row:hover { border-color: var(--accent); }
+
+  .contact-link-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-link-value {
+    font-size: 0.9rem;
+  }
+
+  .contact-link-arrow {
+    color: var(--ink-faint);
+    font-size: 0.9rem;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-text { animation: fadeUp 0.7s ease both; }
+  .hero-right { animation: fadeUp 0.7s ease 0.15s both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding-top: 7rem; }
+    .hero-inner, .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-right { display: none; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Srivarsha Rayasam</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Research,<br><em>design,</em><br>& code.</h1>
+      <p>UCLA student working at the intersection of cognitive science, UX research, and machine learning. I study how people learn — and build things that help.</p>
+      <div class="hero-tags">
+        <span class="tag">UX Research</span>
+        <span class="tag">Cognitive Science</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Psychology</span>
+      </div>
+      <div class="hero-links">
+        <a href="#projects" class="btn btn-primary">View work</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-card">
+        <div>
+          <div class="label">Current focus</div>
+        </div>
+        <div class="value">AI in K–12 Education</div>
+      </div>
+      <div class="hero-stat-card">
+        <div>
+          <div class="label">Background</div>
+        </div>
+        <div class="value">Psych + CS, UCLA</div>
+      </div>
+      <div class="hero-stat-card">
+        <div>
+          <div class="label">Research areas</div>
+        </div>
+        <div class="value">Learning & Cognition</div>
+      </div>
+      <div class="hero-stat-card">
+        <div>
+          <div class="label">Open to</div>
+        </div>
+        <div class="value">UX / PM / Research roles</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Srivarsha (Varsha) Rayasam, a student at UCLA studying Psychology and Cognitive Science with a focus on learning, perception, and human-computer interaction.</p>
+      <p>My work spans user research, machine learning, and academic writing. I'm drawn to questions about how people learn — whether that's studying category learning in neurodevelopmental conditions, exploring how AI is reshaping classrooms, or redesigning the apps people rely on every day.</p>
+      <p>Outside of research, I'm a trained Carnatic classical singer and an avid reader. I also write — about identity, culture, and the quiet moments in between.</p>
+    </div>
+    <div class="about-details">
+      <!-- ============================================================
+           TO UPDATE: just change the text inside .detail-value
+           ============================================================ -->
+      <div class="detail-item">
+        <div class="detail-label">Education</div>
+        <div class="detail-value">UCLA — Psychology & Cognitive Science</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Location</div>
+        <div class="detail-value">Los Angeles, CA</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Interests</div>
+        <div class="detail-value">Learning science, UX research, AI ethics, education policy</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Languages</div>
+        <div class="detail-value">Python, R, English, Telugu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <div class="section-title">Things I've built & researched</div>
+
+  <div class="projects-grid">
+
+    <!-- ============================================================
+         TO ADD A NEW PROJECT: copy this entire .project-card block,
+         paste it below, and update the text and links inside.
+         ============================================================ -->
+
+    <div class="project-card">
+      <div class="project-type">UX Research</div>
+      <div class="project-title">iOS Clock App Redesign</div>
+      <div class="project-desc">Led user research and proposal writing for a group redesign of Apple's Clock app. Conducted interviews, built personas, and prototyped new alarm categorization and snooze customization features.</div>
+      <div class="project-tags">
+        <span class="project-tag">User Interviews</span>
+        <span class="project-tag">Figma</span>
+        <span class="project-tag">Persona Design</span>
+        <span class="project-tag">Psych 124B</span>
+      </div>
+      <div class="project-links">
+        <!-- Replace # with a real link when you have one -->
+        <a href="#" class="project-link">View prototype →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Machine Learning</div>
+      <div class="project-title">RL Agents in the Episodic Milk Maze</div>
+      <div class="project-desc">Implemented Q-Learning and SARSA agents in a custom MiniGrid environment based on Wang et al. (2026), modeling the contrast between habitual and goal-directed navigation behavior in rats.</div>
+      <div class="project-tags">
+        <span class="project-tag">Reinforcement Learning</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Gymnasium</span>
+        <span class="project-tag">Neuroscience</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/varsharayasam/Projects" class="project-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Data Science</div>
+      <div class="project-title">CNN vs. Neural Network Classification</div>
+      <div class="project-desc">Comparative analysis of convolutional and fully-connected neural networks on image classification tasks, including implementation from scratch and performance benchmarking.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">PyTorch</span>
+        <span class="project-tag">CNN</span>
+        <span class="project-tag">Jupyter</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/varsharayasam/Projects/blob/main/CNNvNN.ipynb" class="project-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Data Visualization</div>
+      <div class="project-title">School Suspension & Expulsion Analysis</div>
+      <div class="project-desc">Exploratory data analysis and visualization of suspension and expulsion rates across California public schools, surfacing disparities by race and income.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Pandas</span>
+        <span class="project-tag">Matplotlib</span>
+        <span class="project-tag">Education Equity</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/varsharayasam/Projects/blob/main/education.ipynb" class="project-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Machine Learning</div>
+      <div class="project-title">Clustering Methods Comparison</div>
+      <div class="project-desc">Exploration of unsupervised clustering algorithms (K-Means, DBSCAN, hierarchical) with comparative evaluation of performance on real-world datasets.</div>
+      <div class="project-tags">
+        <span class="project-tag">Scikit-learn</span>
+        <span class="project-tag">Clustering</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Unsupervised ML</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/varsharayasam/Projects/blob/main/ClusteringMethods.ipynb" class="project-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Research</div>
+      <div class="project-title">AI for Jazz Hands for Autism (JHFA)</div>
+      <div class="project-desc">Professional memo to the CEO of a nonprofit recommending strategic uses of generative AI to improve operational efficiency and program delivery.</div>
+      <div class="project-tags">
+        <span class="project-tag">AI Strategy</span>
+        <span class="project-tag">Nonprofit</span>
+        <span class="project-tag">Professional Writing</span>
+      </div>
+      <div class="project-links">
+        <!-- Add a PDF link here if you want to share the doc -->
+        <a href="#" class="project-link">Read memo →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WRITING -->
+<section id="writing">
+  <div class="section-label">Writing</div>
+  <div class="section-title">Research papers & essays</div>
+
+  <div class="writing-list">
+
+    <!-- ============================================================
+         TO ADD A NEW PIECE: copy one .writing-row block, paste it
+         below the last one, and update the text and href.
+         ============================================================ -->
+
+    <a class="writing-row" href="#" target="_blank">
+      <div>
+        <div class="writing-category">Capstone Research · Psych 199</div>
+        <div class="writing-title">AI in High School Classrooms</div>
+        <div class="writing-desc">Exploratory qualitative research with 6 public high school teachers on how AI is reshaping homework, cheating, critical thinking, and classroom design.</div>
+      </div>
+      <div class="writing-arrow">↗</div>
+    </a>
+
+    <a class="writing-row" href="#" target="_blank">
+      <div>
+        <div class="writing-category">Cognitive Science · Psych 124J</div>
+        <div class="writing-title">How Atypical Learners Learn Best</div>
+        <div class="writing-desc">Analysis of category learning differences in autism, ADHD, and dyslexia across three research papers, with proposed future directions for personalized learning interventions.</div>
+      </div>
+      <div class="writing-arrow">↗</div>
+    </a>
+
+    <a class="writing-row" href="#" target="_blank">
+      <div>
+        <div class="writing-category">Legal Writing · EngComp 131A</div>
+        <div class="writing-title">Stare Decisis and the Dobbs Dissent</div>
+        <div class="writing-desc">Close reading of Justice Kagan's dissent in Dobbs v. Jackson, examining how competing interpretations of stare decisis undermine the rule of law.</div>
+      </div>
+      <div class="writing-arrow">↗</div>
+    </a>
+
+    <a class="writing-row" href="#" target="_blank">
+      <div>
+        <div class="writing-category">Education Policy · ED 10</div>
+        <div class="writing-title">Preschool, Environment, and Early Learning</div>
+        <div class="writing-desc">Critical analysis of preschool program research — including the Tennessee study and Boston Public Pre-K — arguing that environment and family choice matter more than program type.</div>
+      </div>
+      <div class="writing-arrow">↗</div>
+    </a>
+
+    <a class="writing-row" href="#" target="_blank">
+      <div>
+        <div class="writing-category">Advocacy Writing · EngComp 131A</div>
+        <div class="writing-title">Gun Control and Personal Testimony</div>
+        <div class="writing-desc">Advocacy letter to Rep. Lauren Boebert weaving personal accounts of gun violence with policy arguments against the Shall Not Be Infringed Act.</div>
+      </div>
+      <div class="writing-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-inner">
+    <div class="contact-text">
+      <div class="section-title">Let's connect.</div>
+      <p>I'm currently open to UX research, product, and research internship opportunities. Feel free to reach out if you'd like to chat about my work or just say hello.</p>
+      <a href="mailto:srivarsha.rayasam@gmail.com" class="btn btn-primary">Send an email</a>
+    </div>
+    <div class="contact-links">
+      <!-- ============================================================
+           TO ADD A LINK: copy one .contact-link-row block and update
+           the label, value, and href.
+           ============================================================ -->
+      <a href="mailto:srivarsha.rayasam@gmail.com" class="contact-link-row">
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">srivarsha.rayasam@gmail.com</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+      <a href="https://github.com/varsharayasam" class="contact-link-row" target="_blank">
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-value">varsharayasam</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+      <!-- Add LinkedIn when you have it -->
+      <a href="#" class="contact-link-row">
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">Add your LinkedIn URL</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<footer>
+  <p>© 2026 Srivarsha Rayasam</p>
+  <p>Built with intention.</p>
+</footer>
+
+</body>
+</html>
