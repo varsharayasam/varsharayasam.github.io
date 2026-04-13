@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Srivarsha Rayasam</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4EE;
+    --ink: #1A1814;
+    --ink-muted: #5C5850;
+    --ink-faint: #9C9890;
+    --accent: #C4673A;
+    --accent-light: #F0DDD4;
+    --border: #E0DDD6;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 4rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-text h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-text h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-text p {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+    max-width: 420px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+
+  .tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--ink-muted);
+    background: var(--white);
+  }
+
+  .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary { background: var(--ink); color: var(--cream); }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--ink); background: var(--white); }
+
+  .hero-right { display: flex; flex-direction: column; gap: 1rem; }
+
+  .hero-stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-stat-card .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .hero-stat-card .value {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  section { padding: 5rem 4rem; max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    margin-bottom: 3rem;
+    line-height: 1.3;
+  }
+
+  .divider { border: none; border-top: 1px solid var(--border); max-width: 1100px; margin: 0 auto; }
+
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+
+  .about-text p { color: var(--ink-muted); margin-bottom: 1rem; line-height: 1.85; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-details { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .detail-item .detail-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.3rem;
+  }
+
+  .detail-item .detail-value { font-size: 0.9rem; color: var(--ink); line-height: 1.5; }
+
+  /* ============================================================
+     EXPERIENCE — TO ADD A NEW ROLE: copy one .exp-card block,
+     paste it, and update company, title, and tags.
+     ============================================================ */
+  .exp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+
+  .exp-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: border-color 0.2s;
+  }
+
+  .exp-card:hover { border-color: #c8c4bc; }
+  .exp-company { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; color: var(--ink); }
+  .exp-title { font-size: 0.8rem; color: var(--ink-muted); letter-spacing: 0.02em; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
+
+  .exp-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    padding: 0.18rem 0.55rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--ink-muted);
+  }
+
+  .projects-sublabel {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+    margin-top: 2.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .projects-sublabel:first-of-type { margin-top: 0; }
+
+  /* ============================================================
+     PROJECTS — TO ADD A NEW PROJECT: copy one .project-card
+     block, paste it, and update the text and links inside.
+     ============================================================ */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 1rem; }
+
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent-light);
+    transition: background 0.2s;
+  }
+
+  .project-card:hover { border-color: #c8c4bc; transform: translateY(-2px); }
+  .project-card:hover::before { background: var(--accent); }
+
+  .project-type { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+  .project-title { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 400; line-height: 1.4; color: var(--ink); }
+  .project-desc { font-size: 0.88rem; color: var(--ink-muted); line-height: 1.75; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .project-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--ink-muted);
+  }
+
+  .project-links { display: flex; gap: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+
+  .project-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .project-link:hover { opacity: 0.7; }
+
+  /* ============================================================
+     EXTRACURRICULARS — TO ADD A NEW ACTIVITY: copy one .ec-card
+     block, paste it, and update the content and link.
+     ============================================================ */
+  .ec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+
+  .ec-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .ec-card:hover { border-color: #c8c4bc; }
+  .ec-org { font-family: 'Lora', serif; font-size: 1rem; font-weight: 400; color: var(--ink); }
+  .ec-role { font-size: 0.8rem; color: var(--ink-muted); }
+  .ec-desc { font-size: 0.85rem; color: var(--ink-muted); line-height: 1.7; flex: 1; }
+
+  .ec-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+    align-self: flex-start;
+  }
+
+  .ec-link:hover { opacity: 0.7; }
+
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-text p { color: var(--ink-muted); line-height: 1.85; margin-bottom: 1rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-link-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color 0.2s;
+  }
+
+  .contact-link-row:hover { border-color: var(--accent); }
+
+  .contact-link-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-link-value { font-size: 0.9rem; }
+  .contact-link-arrow { color: var(--ink-faint); font-size: 0.9rem; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p { font-size: 0.78rem; color: var(--ink-faint); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-text { animation: fadeUp 0.7s ease both; }
+  .hero-right { animation: fadeUp 0.7s ease 0.15s both; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding-top: 7rem; }
+    .hero-inner, .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-right { display: none; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Srivarsha Rayasam</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#extracurriculars">Activities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Build,<br><em>research,</em><br>& lead.</h1>
+      <p>UCLA senior with experience across product management, program management, data analytics, and UX research. I'm drawn to roles where understanding people and building systems overlap.</p>
+      <div class="hero-tags">
+        <span class="tag">Cognitive Science</span>
+        <span class="tag">Product Management</span>
+        <span class="tag">AI in Education</span>
+        <span class="tag">Professional Writing</span>
+      </div>
+      <div class="hero-links">
+        <a href="#experience" class="btn btn-primary">View experience</a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <!-- TO UPDATE: change the text inside .value spans -->
+      <div class="hero-stat-card">
+        <div class="label">Background</div>
+        <div class="value">Cognitive Science + Computing, UCLA</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="label">Experience</div>
+        <div class="value">PM · Program Mgmt · Data · Research</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="label">Skills</div>
+        <div class="value">Python · Figma · SQL · Agile</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="label">Open to</div>
+        <div class="value">Full-time, available ASAP</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Srivarsha (Varsha) Rayasam, a graduating senior at UCLA studying Cognitive Science with a computing emphasis and a minor in Professional Writing. I've worked across product management, program management, data analytics, and UX research — I'm drawn to roles where understanding people and building systems overlap.</p>
+      <p>My work spans building AI-driven tools at Amazon, leading cross-functional product teams, conducting user research, and studying how people learn. I'm especially interested in AI in education and enterprise settings, and in the ways technology can serve large-scale organizations and nonprofits.</p>
+      <p>Outside of professional and academic experiences, I love trying novel, unique drinks at coffee shops and reading and writing. Some of my favorite books include <em>Unaccustomed Earth</em> by Jhumpa Lahiri, <em>The Golden Son</em> by Soumya Gouda, <em>The Silent Patient</em> by Alex Michaelides, and <em>Escape from Slavery</em> by Francis Bok.</p>
+      <!-- ============================================================
+           PERSONAL BLOG: when your blog is live, add this below:
+           <p>I also write — <a href="YOUR_BLOG_URL" style="color:
+           var(--accent);">read it here →</a></p>
+           ============================================================ -->
+    </div>
+    <div class="about-details">
+      <!-- TO UPDATE: change the text inside .detail-value -->
+      <div class="detail-item">
+        <div class="detail-label">Education</div>
+        <div class="detail-value">UCLA — B.S. Cognitive Science, Computing Emphasis<br>Professional Writing Minor · GPA 3.8</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Location</div>
+        <div class="detail-value">Los Angeles, CA</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Focus areas</div>
+        <div class="detail-value">AI in education & enterprise, learning systems, cognition, nonprofit technology</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Technical skills</div>
+        <div class="detail-value">Python · SQL · C++ · Figma · Agile · AppSheet · Docker</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <div class="section-title">Where I've worked</div>
+  <div class="exp-grid">
+
+    <!-- TO ADD A NEW ROLE: copy one .exp-card block, paste it,
+         and update company, title, and tags. -->
+
+    <div class="exp-card">
+      <div class="exp-company">Jazz Hands for Autism</div>
+      <div class="exp-title">Data Analyst</div>
+      <div class="exp-tags">
+        <span class="exp-tag">AppSheet</span>
+        <span class="exp-tag">Data Pipelines</span>
+        <span class="exp-tag">AI Tools</span>
+        <span class="exp-tag">KPI Strategy</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-company">Amazon</div>
+      <div class="exp-title">Program Manager Intern</div>
+      <div class="exp-tags">
+        <span class="exp-tag">AI Automation</span>
+        <span class="exp-tag">Financial Analysis</span>
+        <span class="exp-tag">Program Execution</span>
+        <span class="exp-tag">Stakeholder Reporting</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-company">HippoVision</div>
+      <div class="exp-title">Lead Product Consultant</div>
+      <div class="exp-tags">
+        <span class="exp-tag">Market Research</span>
+        <span class="exp-tag">Product Strategy</span>
+        <span class="exp-tag">Customer Discovery</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-company">Hyphenova</div>
+      <div class="exp-title">Product Manager</div>
+      <div class="exp-tags">
+        <span class="exp-tag">Agile</span>
+        <span class="exp-tag">Roadmapping</span>
+        <span class="exp-tag">Beta User Research</span>
+        <span class="exp-tag">Cross-functional</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-company">Jazz Hands for Autism</div>
+      <div class="exp-title">Research & Evaluation Intern</div>
+      <div class="exp-tags">
+        <span class="exp-tag">ML Modeling</span>
+        <span class="exp-tag">Python</span>
+        <span class="exp-tag">Data Visualization</span>
+        <span class="exp-tag">Program Evaluation</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-company">Energy Innovation Capital</div>
+      <div class="exp-title">Data Analytics & Market Research Intern</div>
+      <div class="exp-tags">
+        <span class="exp-tag">Financial Modeling</span>
+        <span class="exp-tag">Due Diligence</span>
+        <span class="exp-tag">Climate Policy</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-company">Tepia Co</div>
+      <div class="exp-title">Project Management Intern</div>
+      <div class="exp-tags">
+        <span class="exp-tag">Figma</span>
+        <span class="exp-tag">QA Testing</span>
+        <span class="exp-tag">Usability</span>
+        <span class="exp-tag">Documentation</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <div class="section-title">Things I've built & researched</div>
+
+  <div class="projects-sublabel">Technical</div>
+  <div class="projects-grid">
+
+    <!-- TO ADD A NEW PROJECT: copy one .project-card block, paste
+         it, and update the text and links inside. -->
+
+    <div class="project-card">
+      <div class="project-type">UX Research</div>
+      <div class="project-title">iOS Clock App Redesign</div>
+      <div class="project-desc">Led user research and proposal writing for a group redesign of Apple's Clock app. Conducted interviews, built personas, and prototyped new alarm categorization and snooze customization features.</div>
+      <div class="project-tags">
+        <span class="project-tag">User Interviews</span>
+        <span class="project-tag">Figma</span>
+        <span class="project-tag">Persona Design</span>
+      </div>
+      <div class="project-links">
+        <a href="UXProject.pdf" class="project-link" target="_blank">View project →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Machine Learning</div>
+      <div class="project-title">RL Agents in the Episodic Milk Maze</div>
+      <div class="project-desc">Implemented Q-Learning and SARSA agents in a custom MiniGrid environment based on Wang et al. (2026), modeling the contrast between habitual and goal-directed navigation behavior in rats.</div>
+      <div class="project-tags">
+        <span class="project-tag">Reinforcement Learning</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Gymnasium</span>
+        <span class="project-tag">Neuroscience</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/varsharayasam/Projects/blob/main/group1_milkmaze_final.ipynb" class="project-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Data Science</div>
+      <div class="project-title">CNN vs. Neural Network Classification</div>
+      <div class="project-desc">Comparative analysis of convolutional and fully-connected neural networks on image classification tasks, including implementation from scratch and performance benchmarking.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">PyTorch</span>
+        <span class="project-tag">CNN</span>
+        <span class="project-tag">Jupyter</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/varsharayasam/Projects/blob/main/CNNvNN.ipynb" class="project-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Data Visualization</div>
+      <div class="project-title">School Suspension & Expulsion Analysis</div>
+      <div class="project-desc">Exploratory data analysis and visualization of suspension and expulsion rates across California public schools, surfacing disparities by race, income, and district.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Pandas</span>
+        <span class="project-tag">Matplotlib</span>
+        <span class="project-tag">Education Equity</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/varsharayasam/Projects/blob/main/education.ipynb" class="project-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Machine Learning</div>
+      <div class="project-title">Clustering Methods Comparison</div>
+      <div class="project-desc">Exploration and comparison of unsupervised clustering algorithms including K-Means, DBSCAN, and hierarchical clustering on real-world datasets.</div>
+      <div class="project-tags">
+        <span class="project-tag">Scikit-learn</span>
+        <span class="project-tag">Clustering</span>
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Unsupervised ML</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/varsharayasam/Projects/blob/main/ClusteringMethods.ipynb" class="project-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="projects-sublabel">Research & Writing</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-type">Capstone Research · Psych 199</div>
+      <div class="project-title">AI in High School Classrooms</div>
+      <div class="project-desc">Exploratory qualitative research with 6 public high school teachers on how AI is reshaping homework integrity, cheating, critical thinking, and classroom design.</div>
+      <div class="project-tags">
+        <span class="project-tag">Qualitative Research</span>
+        <span class="project-tag">Interviews</span>
+        <span class="project-tag">AI in Education</span>
+      </div>
+      <div class="project-links">
+        <a href="ai-classrooms.pdf" class="project-link" target="_blank">Read paper →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Cognitive Science · Psych 124J</div>
+      <div class="project-title">How Atypical Learners Learn Best</div>
+      <div class="project-desc">Analysis of category learning differences in autism, ADHD, and dyslexia across three research papers, with proposed future directions for personalized learning interventions.</div>
+      <div class="project-tags">
+        <span class="project-tag">Cognitive Science</span>
+        <span class="project-tag">Neurodevelopment</span>
+        <span class="project-tag">Learning Research</span>
+      </div>
+      <div class="project-links">
+        <a href="atypical-learners.pdf" class="project-link" target="_blank">Read paper →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">Legal Writing · EngComp 131A</div>
+      <div class="project-title">Stare Decisis and the Dobbs Dissent</div>
+      <div class="project-desc">Close reading of Justice Kagan's dissent in Dobbs v. Jackson, examining how competing interpretations of stare decisis undermine the rule of law and endanger precedent.</div>
+      <div class="project-tags">
+        <span class="project-tag">Legal Analysis</span>
+        <span class="project-tag">Constitutional Law</span>
+        <span class="project-tag">Persuasive Writing</span>
+      </div>
+      <div class="project-links">
+        <a href="dobbs-dissent.pdf" class="project-link" target="_blank">Read paper →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="extracurriculars">
+  <div class="section-label">Activities</div>
+  <div class="section-title">Beyond the resume</div>
+  <div class="ec-grid">
+
+    <!-- TO ADD A NEW ACTIVITY: copy one .ec-card block, paste it,
+         and update the content and link. -->
+
+    <div class="ec-card">
+      <div class="ec-org">Bruin Microfinance</div>
+      <div class="ec-role">External Vice President</div>
+      <div class="ec-desc">Leading a consulting division of 20+ students across 5+ clients. Spearheaded client outreach, project timelines, and an internal Excel tool that reduced deliberation time by 75%.</div>
+      <a href="https://www.instagram.com/bruinmicrofinance" class="ec-link" target="_blank">Instagram →</a>
+    </div>
+
+    <div class="ec-card">
+      <div class="ec-org">Bruin Hindus</div>
+      <div class="ec-role">Internal Vice President</div>
+      <div class="ec-desc">Leading the finance committee, facilitating bi-weekly Dharma discussions, and growing club membership by 50% through expanded outreach and community programming for 1,000+ students.</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-inner">
+    <div class="contact-text">
+      <div class="section-title">Let's connect.</div>
+      <p>I'm currently open to full-time roles in product management, program management, and operations. Feel free to reach out — I'd love to chat.</p>
+      <p style="font-size: 0.85rem; color: var(--ink-faint);">Resume available upon request.</p>
+      <a href="mailto:srivarsha.rayasam@gmail.com" class="btn btn-primary" style="margin-top: 1rem;">Send an email</a>
+    </div>
+    <div class="contact-links">
+      <!-- TO ADD A LINK: copy one .contact-link-row block and update
+           the label, value, and href. -->
+      <a href="mailto:srivarsha.rayasam@gmail.com" class="contact-link-row">
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">srivarsha.rayasam@gmail.com</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+      <a href="https://www.linkedin.com/in/srivarsha-rayasam" class="contact-link-row" target="_blank">
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">srivarsha-rayasam</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+      <a href="https://github.com/varsharayasam" class="contact-link-row" target="_blank">
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-value">varsharayasam</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<footer>
+  <p>© 2026 Srivarsha Rayasam</p>
+  <p>Built with intention.</p>
+</footer>
+
+</body>
+</html>
